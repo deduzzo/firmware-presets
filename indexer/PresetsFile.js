@@ -3,6 +3,7 @@
 const readline = require('readline');
 const fs = require("fs");
 const crypto = require('crypto');
+const path = require("path");
 
 class PresetsFile
 {
@@ -276,7 +277,7 @@ class PresetsFile
     _processFilePathProperty(property, line)
     {
         this._checkPropertyDublicated(property);
-        const stat = fs.statSync(line);
+        const stat = fs.statSync(path.resolve("../../" +line));
         if (!stat || stat.isDirectory()) {
             this._addError(`line ${this._currentLine}, can't find file '${line}'`);
         } else {
@@ -286,6 +287,7 @@ class PresetsFile
 
     _processFilePathArrayProperty(property, line)
     {
+        line = path.resolve("../../" + line);
         if (!this[property]) {
             this[property] = [];
         }

@@ -23,7 +23,11 @@
   "externalDocs": {
     "url": "https://theoomoregbee.github.io/"
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Repository"
+    }
+  ],
   "components": {
     "schemas": {},
     "parameters": {
@@ -74,5 +78,36 @@
       }
     }
   },
-  "paths": {}
+  "paths": {
+    "/api/v1/repository": {
+      "post": {
+        "summary": "Repository",
+        "description": "Repository something.",
+        "tags": [
+          "Repository"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "unique_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
 }
