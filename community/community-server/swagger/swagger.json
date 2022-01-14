@@ -79,8 +79,8 @@
     }
   },
   "paths": {
-    "/api/v1/repository": {
-      "post": {
+    "/api/v1/repository/{name}/*": {
+      "get": {
         "summary": "Repository",
         "description": "Repository something.",
         "tags": [
@@ -94,6 +94,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `name`"
           }
         ],
         "responses": {
@@ -101,7 +110,7 @@
             "description": "The requested resource"
           },
           "404": {
-            "description": "Resource not found"
+            "description": "No user with the specified ID was found in the database."
           },
           "500": {
             "description": "Internal server error"

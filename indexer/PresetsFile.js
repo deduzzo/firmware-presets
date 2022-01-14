@@ -5,6 +5,9 @@ const fs = require("fs");
 const crypto = require('crypto');
 const path = require("path");
 
+
+const pathPrefix = "../../";
+
 class PresetsFile
 {
     constructor(fullPath, settings, errors)
@@ -17,7 +20,7 @@ class PresetsFile
         this.options = [];
         this._currentOption = undefined;
 
-        const binaryFileContent = fs.readFileSync(this.fullPath);
+        const binaryFileContent = fs.readFileSync(path.resolve(pathPrefix + this.fullPath));
         let sum = crypto.createHash('sha256');
         sum.update(binaryFileContent);
         this.hash = sum.digest('hex');
@@ -277,7 +280,7 @@ class PresetsFile
     _processFilePathProperty(property, line)
     {
         this._checkPropertyDublicated(property);
-        const stat = fs.statSync(path.resolve("../../" +line));
+        const stat = fs.statSync(path.resolve(pathPrefix +line));
         if (!stat || stat.isDirectory()) {
             this._addError(`line ${this._currentLine}, can't find file '${line}'`);
         } else {
@@ -287,14 +290,14 @@ class PresetsFile
 
     _processFilePathArrayProperty(property, line)
     {
-        line = path.resolve("../../" + line);
+        var filePath = path.resolve(pathPrefix + line);
         if (!this[property]) {
             this[property] = [];
         }
 
-        if (fs.existsSync(line)) {
+        if (fs.existsSync(filePath)) {
              // still could be a folder, so have to filter out folders
-            const stat = fs.statSync(line);
+            const stat = fs.statSync(filePath);
             if (!stat || stat.isDirectory()) {
                 this._addError(`line ${this._currentLine}, a folder is specified instead of a file: '${line}'`);
             } else {

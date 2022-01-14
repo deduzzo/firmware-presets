@@ -35,7 +35,7 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
-  'POST /api/v1/repository': { action: 'repository' },
+  'GET /api/v1/repository/:name/*': { action: 'repository' },
 
 
 
