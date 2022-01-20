@@ -38,7 +38,11 @@ module.exports = {
     if (file && repoName)
     {
       try {
-        const fileContent = fs.readFileSync(path.resolve('../../presets/' + repoName + "/" + file));
+        if (file !== 'index.json')
+          file = path.resolve('../../presets/' + repoName + "/" + file);
+        else
+          file = path.resolve('../../index.json');
+        const fileContent = fs.readFileSync(file);
         return exits.success(fileContent);
       }
       catch(ex)

@@ -36,6 +36,8 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
 
   'GET /api/v1/repository/:name/*': { action: 'repository' },
+  'GET /api/v1/repo/:name/*': { action: 'dynamic-repository' },
+
 
 
 
