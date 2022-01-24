@@ -1,8 +1,10 @@
 'use strict';
 
 const fs = require("fs");
-const path = require("path");
+
 const PresetsFile = require('./PresetsFile');
+const pathPrefix =  "../../";
+const path = require('path');
 
 class PresetsFolder
 {
@@ -13,11 +15,11 @@ class PresetsFolder
         this.fullPath = fullPath;
         this.name = "";
 
-        let list = fs.readdirSync(fullPath);
+        let list = fs.readdirSync(path.resolve(pathPrefix + fullPath));
 
         list.forEach((fileName) => {
             const fullFileName = fullPath + '/' + fileName;
-            const stat = fs.statSync(fullFileName);
+            const stat = fs.statSync(path.resolve(pathPrefix + fullFileName));
             if (!fileName.startsWith(".")) {
                 if (stat && stat.isDirectory()) {
                     let subdir = new PresetsFolder(fullFileName, settings, presetFilesArray, errors);

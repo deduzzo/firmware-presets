@@ -23,7 +23,14 @@
   "externalDocs": {
     "url": "https://theoomoregbee.github.io/"
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Repository"
+    },
+    {
+      "name": "Dynamic repository"
+    }
+  ],
   "components": {
     "schemas": {},
     "parameters": {
@@ -74,5 +81,75 @@
       }
     }
   },
-  "paths": {}
+  "paths": {
+    "/api/v1/repository/{name}/*": {
+      "get": {
+        "summary": "Repository",
+        "description": "Repository something.",
+        "tags": [
+          "Repository"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "unique_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `name`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "No user with the specified ID was found in the database."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/v1/repo/{name}/*": {
+      "get": {
+        "summary": "Dynamic repository",
+        "tags": [
+          "Dynamic repository"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Route pattern variable `name`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "No file found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
 }
