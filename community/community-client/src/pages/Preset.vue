@@ -35,14 +35,12 @@
 <script>
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
-
+const settings = require('../../../../indexer/Settings');
 export default {
   name: 'Preset',
   setup() {
     const $q = useQuasar()
     const _default_versions = ["4.3","4.2"]
-    const _default_categories = ["TUNE", "RATES", "FILTERS", "RC_LINK", "RC_SMOOTHING", "OSD", "VTX", "LEDS", "MODES", "OTHER", "BNF"]
-    const _statuses = ["OFFICIAL", "COMMUNITY", "EXPERIMENTAL"]
 
 
     let category = ref(null);
@@ -53,8 +51,8 @@ export default {
     return {
       title,
       versions,
-      categories: _default_categories,
-      statuses: _statuses,
+      categories: settings.PresetCategories,
+      statuses: settings.PresetStatusEnum,
       status,
       category,
       onSubmit () {
